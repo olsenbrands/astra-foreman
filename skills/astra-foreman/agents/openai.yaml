@@ -1,0 +1,4 @@
+interface:
+  display_name: "Astra Foreman"
+  short_description: "Economical agent orchestration with accountable review"
+  default_prompt: "Use $astra-foreman to plan and coordinate this work with economical agents and evidence-backed acceptance."
