@@ -80,12 +80,15 @@ allowance remains because a CLI is logged in.
 
 If no original outcome completes over two planned checkpoints, stop new dispatch
 and examine whether the program is overlarge, fragmented, missing proof, or blocked
-by integration. Consolidate or take over as appropriate. If verification/lead
-coordination dominates several comparable units, change the process before the
-next wave. Do not continue buying review after all required claims are resolved.
-The pause is for a concrete lead disposition, not a new planning project. Continue
-independent ready work once the disposition is recorded; keep blocked dependencies
-unfinished. Don't spend another hour rewriting orchestration documents.
+by integration. Compare the whole remaining delivery cost, not the apparent size of
+the next edit. Consolidate, return routine repair to its builder, or take over only
+for a concrete reason and bounded stopping point. If verification/lead coordination
+dominates several comparable units, change the process before the next wave. Do not
+continue buying review after all required claims are resolved. The pause is for a
+concrete lead disposition, not a new planning project or automatic transfer of
+worker ownership. Continue independent ready work once the disposition is recorded;
+keep blocked dependencies unfinished. Don't spend another hour rewriting
+orchestration documents.
 
 Reserve the last part of the authorized envelope for assembled verification,
 repairs, and handoff. When an explicit user cap is reached, stop billable dispatch

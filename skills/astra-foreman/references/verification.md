@@ -74,7 +74,10 @@ reduced assurance without the user's authority.
    path: browser interaction, data read-back, or external observation as applicable.
 
 Independent review may itself run the checks; the lead need not repeat every
-identical passing invocation. Deterministic failure outranks a model PASS.
+identical passing invocation. The lead must still inspect the real candidate,
+criteria evidence, and reviewer findings, and directly check critical user-facing
+or integration behavior plus material gaps and disputes. Deterministic failure
+outranks a model PASS.
 Record flaky results honestly and investigate them without an unbounded rerun loop.
 
 Reuse evidence only while its candidate inputs and relevant dependencies remain
@@ -89,10 +92,12 @@ assembled candidate and all original criteria, reuse it instead of buying anothe
 ## Lead acceptance
 
 Reconcile every original promise to an evidence artifact and disposition. Review
-the diff and consequential findings yourself; reproduce the highest-risk or
-disputed observations when needed. Audit routing and process closure separately
-from product proof. Do not ask a blind product reviewer to certify hidden dispatch
-history. Close all writers and required reviews before final acceptance.
+the real candidate/diff and consequential findings yourself; reproduce the
+highest-risk or disputed observations when needed, and directly exercise critical
+user-facing or integration behavior. Audit routing and process closure separately
+from product proof. A reviewer PASS is evidence to assess, never a rubber stamp.
+Do not ask a blind product reviewer to certify hidden dispatch history. Close all
+writers and required reviews before final acceptance.
 
 Use ACCEPTED only for the scope actually supported, SELF_REVIEWED when that is
 the assurance, NEEDS FIX for an in-scope defect, and BLOCKED for an actual missing
