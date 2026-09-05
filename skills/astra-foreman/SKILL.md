@@ -35,9 +35,10 @@ messages, a new paid service, or broader scope.
 
 For a coherent substantive outcome, use one qualified builder and independent
 review when the change is meaningful. The builder owns routine implementation
-details and checks inside the written contract; it escalates material scope,
-architecture, interfaces, risk, authority, or an unmet criterion. Builders do
-not delegate or use foreman skills.
+details, checks, and bounded ordinary repairs inside the written contract. It
+escalates a criterion conflict, missing authority, material scope, architecture,
+interface, or risk change, or a criterion still unmet after bounded ordinary
+repair. Builders do not delegate or use foreman skills.
 
 Direct work is an exception for an answer, trivial inert edit, or tightly coupled
 fix only when the *whole delivery* cost of dispatch, supervision, independent
@@ -88,6 +89,12 @@ repeated attributable failure, unavailable worker, coupled integration that no
 longer fits the ticket, or a time-critical safe recovery. State the reason, the
 bounded stopping point, and what remains for independent review. Before replacing
 any writer, establish it is terminal and reconcile partial edits.
+
+After two unsuccessful attempts on the original outcome, stop that route and
+diagnose: choose a changed contract or route, bounded takeover, escalation, or a
+real blocker. Preserve history across renamed or rerouted tickets. If that recovery
+fails, diagnose again rather than cycling automatically. This applies to one-off
+delegation as well as sprints.
 
 Keep a compact private crew record. Change a route after diagnosed evidence, not
 one quiet interval. If review or coordination starts dominating the tail, pause at

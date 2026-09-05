@@ -4,7 +4,7 @@
 
 **v0.1.1 · Codex skill · MIT licensed**
 
-Astra Foreman keeps Astra or Sol in charge of understanding the outcome,
+I built Astra Foreman to keep Astra or Sol in charge of understanding the outcome,
 architecture, crew selection, supervision, independent review, and final
 acceptance. For coherent substantive work, it delegates qualified builders
 through authorized delivery: implementation, tests, routine repair, integration,
@@ -31,7 +31,7 @@ becomes substantive.
 
 ## Install and use
 
-1. Download the versioned ZIP from the setup page.
+1. Download the versioned ZIP from the [setup page](https://www.dontsleeponai.com/astra-foreman).
 2. Extract the `astra-foreman` folder.
 3. Ask Codex to inspect and install it in its user-level skills directory,
    preserving an existing installation before replacement.

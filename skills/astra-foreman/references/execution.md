@@ -14,8 +14,9 @@ OWNERSHIP: exact worktree and permitted write paths; shared resources and depend
 ROUTE: requested model/effort, reason, evidence status, budget/checkpoint
 BOUNDARIES: authorized effects through tests, ordinary repair, integration, and
             permitted release operations; no delegation, foreman skills, or unrelated changes
-STOP: material scope, architecture, interface, risk, authority conflict, unmet
-      criterion, unavailable tool, or exceeded envelope;
+STOP: criterion conflict, missing authority, material scope, architecture,
+      interface, or risk change, criterion still unmet after bounded ordinary
+      repair, unavailable tool, or exceeded envelope;
       return the evidence and partial state; do not improvise a broader task
 RETURN: result, changed paths, criterion evidence, exact checks and exits,
         remaining concerns, process/artifact identity, usage or unavailable
