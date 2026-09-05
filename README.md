@@ -1,72 +1,65 @@
 # Astra Foreman
 
-I built Astra Foreman to put my strongest Codex model on the decisions that matter:
-understanding the job, choosing the crew, overseeing progress and accepting the
-finished work. Bounded implementation can go to smaller capable agents, with
-independent review for meaningful changes.
+![Astra Foreman](assets/astra-foreman-hero.png)
 
-**v0.1.0 · Codex skill · MIT licensed**
+**v0.1.1 · Codex skill · MIT licensed**
 
-[Get the ZIP and setup guide](https://www.dontsleeponai.com/astra-foreman).
+Astra Foreman keeps Astra or Sol in charge of understanding the outcome,
+architecture, crew selection, supervision, independent review, and final
+acceptance. For coherent substantive work, it delegates qualified builders
+through authorized delivery: implementation, tests, routine repair, integration,
+and permitted release operations.
 
-## What I designed it to do
+## What it does
 
-- Let Astra or Sol lead, with a complete Codex-only workflow.
-- Use optional Claude or Grok routes when available and authorized.
-- Apply preferences such as “favor Grok today” only to suitable roles, without
-  giving a builder authority to approve its own work.
-- Reassign work after quota limits or repeated attributable problems, preserving
-  scope, ownership and independent verification.
-- Keep a small written record of results, quality, availability and decisions.
-- Interrupt unproductive review loops without treating a round limit as proof
-  that unfinished work is good enough.
+- Helps brainstorm and plan before implementation is authorized.
+- Gives builders a clear contract and discretion over routine details and checks.
+- Escalates material scope, architecture, interface, risk, and authority choices
+  to the lead or user as appropriate.
+- Preserves execution ownership across review and release gates; a gate pauses for
+  evidence or judgment rather than making the lead the default builder.
+- Uses independent review for meaningful changes and requires lead inspection of
+  the actual candidate, evidence, critical user-facing or integration behavior,
+  gaps, and disputes before acceptance.
+- Routes by qualified capability, available provider capacity, user preferences,
+  and the whole delivery cost without claiming guaranteed savings.
 
-The instructions are in [SKILL.md](skills/astra-foreman/SKILL.md). Supporting
-references load when needed. The Python standard-library helper records review
-reservations; it does not launch agents, enforce spending, kill processes or
-certify acceptance.
+Direct lead execution remains appropriate for answers, trivial inert edits, or a
+tightly coupled fix when dispatch, supervision, review, repair, and integration
+would cost more than doing it directly. Reassess at a safe checkpoint if that tail
+becomes substantive.
 
 ## Install and use
 
 1. Download the versioned ZIP from the setup page.
-2. Extract its `astra-foreman` folder.
-3. Ask Codex to inspect that folder and install it in its user-level skills
-   directory, preserving any existing installation before replacement.
-4. In a new turn, invoke `$astra-foreman` with your task.
+2. Extract the `astra-foreman` folder.
+3. Ask Codex to inspect and install it in its user-level skills directory,
+   preserving an existing installation before replacement.
+4. Start a new Codex session and invoke `$astra-foreman` with the task.
 
-You're done when Codex recognizes the skill and explains its proposed scope,
-verification and crew. Python 3.9+ is needed for the review helper. Available
-agents, model controls and optional provider accounts depend on the runtime.
-The skill does not supply subscriptions or bypass permissions.
+Python 3.9+ is required only for the dependency-free review-reservation helper.
+Available agents, model controls, and optional provider accounts depend on the
+runtime. The skill neither supplies subscriptions nor bypasses permissions.
 
 Example:
 
 ```text
-$astra-foreman Plan this build with me. Favor suitable Grok implementation work
-today, keep independent review, and wait for my approval before implementing.
+$astra-foreman Plan this build, delegate the substantive delivery to qualified
+workers, retain independent review, and wait for my approval before deployment.
 ```
 
-## What I have tested
+## Validation and limits
 
-The helper passes 12 dependency-free tests. Six bounded diagnostic scenarios
-covered a live small coding task, provider preferences and quota changes, stalled
-workers, noisy review findings, exhausted repair allowances and cold continuation
-from a saved project. The outage/stall/repair events were simulated; the small
-build and saved-project checks were live. Independent grading passed the batch.
+The included helper has a dependency-free test suite. This release also receives
+focused package checks and a scenario review of its delivery, repair, review, and
+acceptance boundaries. Those checks support this package; they do not prove
+multi-hour reliability or guaranteed cost savings.
 
-These are initial checks, not evidence of guaranteed savings or multi-hour sprint
-reliability. Native requested model identities were recorded separately from
-unavailable independently confirmed serving/billing metadata. I recommend reading
-the instructions and using a bounded, reversible task before a consequential run.
+See [SKILL.md](skills/astra-foreman/SKILL.md), supporting references, and the
+[changelog](CHANGELOG.md). This public package contains no account data,
+machine-specific configuration, private logs, or private project history.
 
-Run the helper tests from the repository root:
+## License
 
-```sh
-python3 -m unittest discover -s tests -v
-```
-
-## License and limits
-
-MIT licensed; see [LICENSE](LICENSE). Use at your own risk. Independent model
-review is a useful check, not a correctness guarantee. This release contains no
-private development logs, account data or machine-specific configuration.
+MIT licensed; see [LICENSE](LICENSE). Independent review is a useful check, not a
+correctness guarantee.

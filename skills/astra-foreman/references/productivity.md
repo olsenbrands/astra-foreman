@@ -36,10 +36,11 @@ the lead must name the next artifact and finite checkpoint. Check elapsed time a
 tool/control boundaries; this skill cannot wake a suspended session autonomously.
 
 When a checkpoint fails, choose a concrete action: narrow an overlarge behavior,
-consolidate fragmented tickets, repair the contract/environment, change the route,
-finish the coupled work directly, or establish an external blocker. Do not respond
-with another open-ended audit or generic replan. Keep previous writers terminal
-before replacement. Preserve accepted evidence and progress independent work.
+consolidate fragmented tickets, repair the contract/environment, return a routine
+repair to its builder, change the route, make a bounded takeover for a concrete
+reason, or establish an external blocker. Do not respond with another open-ended
+audit or generic replan. Keep previous writers terminal before replacement.
+Preserve accepted evidence and progress independent work.
 
 ## Lead adjudication, not reviewer unanimity
 
