@@ -22,14 +22,17 @@ A user-reported balance is usable preference evidence, not verified billing tele
 If the user changes priorities, record the new priority and apply it to subsequent
 work; don't cancel productive active workers simply to rebalance providers.
 
-- "Emphasize Grok": favor qualified Grok implementation/recon, with one representative
-  pilot if that route is unfamiliar. Reserve Sol or Opus for consequential independent
-  review. Grok may add advisory findings; a pool preference cannot promote that
-  advisory lane into the required accepting review or replace it.
+- "Emphasize Grok": favor qualified Grok implementation, recon, or review when
+  its model, tools, context, and independence fit the task. If material uncertainty
+  affects eligibility, use one bounded, reversible representative task. The lead
+  still adjudicates evidence and owns final acceptance.
 - "Use Claude allowance": favor Sonnet for suitable builds and Opus for consequential
-  review. Use distinct builder/reviewer contexts even within one family.
+  review, while allowing another qualified Claude route when it clears the task's
+  bar. Use distinct builder/reviewer contexts even within one family.
 - "Mainly Codex today": favor Luna for factual/mechanical tasks, Terra for bounded
-  builds, and fresh Sol for consequential review, keeping the Astra/Sol lead.
+  builds, and fresh Sol for consequential review, keeping the Astra/Sol lead. Apply
+  the substantial-plan cross-family preference in [routing.md](routing.md) when
+  another authorized qualified family is already usable.
 
 Apply model-specific preferences only to eligible roles. Do not spend a premium
 model on busywork merely to consume expiring allowance. If a hard restriction
@@ -44,16 +47,17 @@ CLI installation is required to use the skill with Codex alone.
 | Available and authorized crew | Suitable builders/recon | Consequential independent review |
 |---|---|---|
 | Codex only | Luna/Terra; stronger Codex when required | Fresh Sol, or fresh Astra if Sol unavailable and authorized |
-| Codex + Grok | Eligible Codex or Grok; apply user preference | Fresh Sol/Astra |
-| Codex + Claude | Eligible Codex or Sonnet; apply user preference | Fresh Sol/Astra or Opus |
-| All three | Eligible routes from all three | Fresh Sol/Astra or Opus |
+| Codex + Grok | Qualified Codex or Grok; apply user preference | Qualified fresh Sol/Astra or Grok; apply independence and cross-family rules |
+| Codex + Claude | Qualified Codex or Claude; apply user preference | Qualified fresh Sol/Astra or Claude; Opus is a starting candidate for consequential review |
+| All three | Qualified routes from all three | Any qualified independent route; strongly prefer another family for a substantial plan |
 
 These examples presume the particular models are available. Discover exact
 models/efforts from the runtime; map the role to another qualified available
 Codex model if needed. A Codex account alone does not guarantee every model or
 subagent tool. If no independent execution surface is available, disclose review
 pending/self-review under verification.md; do not claim an independent pass.
-Family diversity is useful when available, never a requirement for Codex-only use.
+Codex-only use remains complete. When another authorized qualified family is
+already usable, apply the strong substantial-plan preference in routing.md.
 
 ## Rate and usage limits: notify, reconcile, continue
 
@@ -89,11 +93,16 @@ remaining blocker. The skill cannot keep an unavailable primary session running.
 
 ## Written performance record
 
-Before the first delegated dispatch, create a compact crew section in the existing
-run record or `.foreman/<run-id>/crew.md`. For a read-only task use a private task
-directory outside the target repository. Tell the user its path. This is required
-even for a small delegated session, but one row is sufficient; do not initialize
-a whole program framework. The lead alone writes it. Keep it out of publication.
+Before the first delegated dispatch, use the authoritative current checkpoint
+described in [sprints.md](sprints.md). Add a compact crew section there or in
+`.foreman/<run-id>/crew.md`; append-only crew and decision history may remain in
+that record. For a read-only task use a private task directory outside the target
+repository. Tell the user its path. One row is enough for a small session; do not
+initialize a program framework. The lead alone writes it and keeps it private.
+
+When the review guard is in use, its `reviews.db` is authoritative for reservation
+lifecycle and counts. Link the relevant entries rather than manually mirroring
+their live state. Keep raw evidence separately and link it from the checkpoint.
 
 Use this structure; existing equivalent fields need not be duplicated:
 
@@ -112,9 +121,9 @@ Summary by comparable role/task-shape/model/effort/environment:
 Routing decisions: old route -> new route | cause/evidence | next observation
 ```
 
-Update at dispatch, a material checkpoint problem, report, review adjudication,
-and acceptance. Consult the record before the next comparable dispatch and after
-compaction/restart. Link raw proof instead of copying transcripts. Reuse run records
+Update the current checkpoint at dispatch, a material checkpoint problem, report,
+review adjudication, and acceptance. Consult it before the next comparable dispatch
+and after compaction/restart. Link raw proof instead of copying transcripts. Reuse run records
 across the same sprint's sessions; a new unrelated run starts a new record. Prior
 records may inform a prior when explicitly available, but don't silently create
 global memory, provider policy, or an account-wide reputation database.

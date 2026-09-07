@@ -63,18 +63,24 @@ justify a framework. Keep process lighter than the delivery it protects. Read
 3. Resolve architecture and interfaces before dispatch. Assign one coherent
    behavior that can be implemented and checked together; split only for
    independent ownership or real uncertainty.
-4. Read [routing.md](references/routing.md) and
+4. For a substantial plan, strongly prefer one qualified reviewer from a
+   different provider family before broad implementation when an authorized
+   route is already usable. Give it a decision-relevant question about the
+   goal, architecture, assumptions, or evidence. Apply the detailed selection
+   and exception rule in [routing.md](references/routing.md).
+5. Read [routing.md](references/routing.md) and
    [crew-control.md](references/crew-control.md). Route among qualified,
    authorized capacity by task fit, risk, independence, user preference, and
    whole delivery cost. Codex-only is complete; provider limits reroute eligible
    work without lowering the quality bar.
-5. Send the compact [execution contract](references/execution.md), including
+6. Send the compact [execution contract](references/execution.md), including
    fixed decisions, worker discretion, write ownership, checks, checkpoint, and
    escalation boundaries. Use a fresh context for independent review.
 
-Start an unfamiliar route with a representative reversible outcome. Inspect an
-early artifact when a failure could waste meaningful effort. Expand only after
-the route, evidence, review, and integration path make sense.
+When route uncertainty matters, start with one bounded, reversible representative
+task. Inspect an early artifact that exercises the promise and most consequential
+uncertainty before expanding similar work. Choose the artifact for the task; it
+may be a reproduction, focused check, resolved interface, or real user journey.
 
 ## Supervise without taking ownership by default
 
@@ -124,8 +130,10 @@ finite question; no round or budget limit turns missing proof into acceptance.
 ## Close against the original request
 
 Reconcile each promise to real evidence. Report completed outcomes, evidence,
-remaining work, material limits, actual or unavailable usage, and the exact next
-gate. Keep implementation, independent review, local acceptance, merge,
+remaining work, material limits, elapsed time, actual or unavailable usage, and
+the exact next gate. Distinguish requested and served identity, API estimates,
+actual charges, and subscription quota when relevant. Keep implementation,
+independent review, local acceptance, merge,
 deployment, and live acceptance distinct. A worker DONE, green CI, reviewer PASS,
 or clean tracker never substitutes for the requested result.
 

@@ -14,10 +14,13 @@ Batch tightly related low-risk edits under one review contract. Keep distinct
 high-risk ownership and proof boundaries. Every meaningful changed behavior
 must be covered; batching is not an exemption from independent review.
 
-For a substantial plan, request an independent challenge before broad implementation:
-missing user promises, architectural failure modes, critical dependencies, overlarge
-or fragmented tickets, absent proof, and credible cost traps. Do not require a
-panel or repeated approval for every routine plan adjustment.
+For a substantial plan, strongly prefer one qualified different-family challenge
+before broad implementation when an authorized route is already usable. Target
+missing user promises, architectural failure modes, critical dependencies,
+high-impact assumptions, and absent proof. State the question and decision it can
+change. Apply the qualifications, exceptions, family definitions, and selective
+implementation-review triggers in [routing.md](routing.md); do not create a panel
+or repeated approval for routine plan adjustments.
 
 ## Reviewer contract
 
@@ -44,11 +47,15 @@ Readable evidence takes precedence over an exact first-line spelling.
 
 ## Candidate identity and independence
 
-Freeze the review unit. Prefer a dedicated commit/worktree or isolated product
-snapshot. Record the baseline, complete diff (including untracked product files),
-candidate revision/content fingerprint, and dependencies. Keep prompts, logs, and
-review artifacts outside the candidate. Do not hide relevant untracked changes
-behind a clean tracked diff or assume ignored files are irrelevant.
+Establish that all writers to the review unit are terminal, then freeze it and
+dispatch review. Unrelated isolated work may continue. Prefer a dedicated
+commit/worktree or isolated product snapshot. Record the baseline, complete diff
+(including untracked product files), candidate revision/content fingerprint, and
+dependencies. Keep prompts, logs, and review artifacts outside the candidate. Do
+not hide relevant untracked changes behind a clean tracked diff or assume ignored
+files are irrelevant. Further edits reopen affected criteria and require
+proportionate affected checks and review; reuse unchanged evidence only with an
+explicit impact rationale.
 
 For a reviewer with tool access, restrict writes where possible and compare
 before/after product content. HEAD alone does not detect uncommitted mutation.

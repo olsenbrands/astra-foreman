@@ -2,9 +2,9 @@
 
 ![Astra Foreman](assets/astra-foreman-hero.png)
 
-**v0.1.1 · Codex skill · MIT licensed**
+**v0.2.0 · Codex skill · MIT licensed · private preview**
 
-I built Astra Foreman to keep Astra or Sol in charge of understanding the outcome,
+Astra Foreman keeps Astra or Sol in charge of understanding the outcome,
 architecture, crew selection, supervision, independent review, and final
 acceptance. For coherent substantive work, it delegates qualified builders
 through authorized delivery: implementation, tests, routine repair, integration,
@@ -23,6 +23,9 @@ and permitted release operations.
   gaps, and disputes before acceptance.
 - Routes by qualified capability, available provider capacity, user preferences,
   and the whole delivery cost without claiming guaranteed savings.
+- Strongly prefers a qualified different-family challenge for substantial plans
+  when an authorized route is already usable, with targeted cross-family review
+  for consequential unresolved implementation questions.
 
 Direct lead execution remains appropriate for answers, trivial inert edits, or a
 tightly coupled fix when dispatch, supervision, review, repair, and integration
@@ -31,11 +34,14 @@ becomes substantive.
 
 ## Install and use
 
-1. Download the versioned ZIP from the [setup page](https://www.dontsleeponai.com/astra-foreman).
-2. Extract the `astra-foreman` folder.
-3. Ask Codex to inspect and install it in its user-level skills directory,
+The public [setup page](https://www.dontsleeponai.com/astra-foreman) is a preview
+and waitlist. It does not currently offer a public download. If you have been
+given an authorized private package or repository:
+
+1. Obtain the versioned `astra-foreman` folder from that private source.
+2. Ask Codex to inspect and install it in its user-level skills directory,
    preserving an existing installation before replacement.
-4. Start a new Codex session and invoke `$astra-foreman` with the task.
+3. Start a new Codex session and invoke `$astra-foreman` with the task.
 
 Python 3.9+ is required only for the dependency-free review-reservation helper.
 Available agents, model controls, and optional provider accounts depend on the
@@ -56,7 +62,7 @@ acceptance boundaries. Those checks support this package; they do not prove
 multi-hour reliability or guaranteed cost savings.
 
 See [SKILL.md](skills/astra-foreman/SKILL.md), supporting references, and the
-[changelog](CHANGELOG.md). This public package contains no account data,
+[changelog](CHANGELOG.md). The skill package contains no account data,
 machine-specific configuration, private logs, or private project history.
 
 ## License

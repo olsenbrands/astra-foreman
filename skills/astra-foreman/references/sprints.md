@@ -8,9 +8,12 @@ diffs. This is an instruction-level protocol, not a machine-enforced state guard
 If the project has an existing required guard, operate through it; do not edit its
 derived state or discard it to make progress counters convenient.
 
-The lead owns the record. Keep a current checkpoint plus append-only decisions and
-attempts. Do not maintain duplicate JSON, Markdown, and chat projections unless
-the repository's actual tooling requires them. Record:
+The lead owns the record. One current checkpoint is authoritative for outcome
+status, ownership, and next action. Append-only decisions and crew history may be
+sections of that record. Existing `reviews.db` is authoritative for review
+reservations and counts; link its entries instead of mirroring live state. Keep
+raw evidence separately and link it. Do not maintain duplicate JSON, Markdown,
+and chat projections unless the repository's actual tooling requires them. Record:
 
 ```text
 Original objective and user-authorized scope; original outcome IDs and criteria
@@ -19,7 +22,7 @@ Current plan/dependencies; builder and integration owners; final acceptance gate
 Routes: requested/observed models and efforts; providers; billing uncertainty
 Active workers: IDs, exact workspaces/write sets, attempt, checkpoint, process state
 Outcome states: pending / working / review pending / accepted / externally blocked
-Evidence: candidate identity, criterion coverage, checks, independent review
+Evidence: candidate identity, criterion coverage, checks, independent review links
 Attempts/decisions: root outcome ID, failure cause, change in approach, timestamp
 Usage: observed totals by provider, lead when available, unknowns, forecast caveats
 Crew record: provider states, current preference, attempt quality and route decisions
@@ -44,11 +47,15 @@ it is not an atomic transaction with the external agent runtime.
 
 ## Pilot and flow control
 
-Start with one representative outcome that exercises the intended build/review
-route and integration assumption. Require an early concrete artifact for ambiguous
-or expensive work, generally within 15–20 minutes, adjusted to the task. These are
-lead-selected checkpoints, not provider-enforced timeouts. A useful result can
-be a reproduction, coherent diff with a focused check, or resolved interface.
+Inspect an early artifact that exercises the promise and most consequential
+uncertainty before expanding similar work, generally within 15–20 minutes for
+ambiguous or expensive work and adjusted to the task. When the outcome persists
+or consumes state, prefer a representative user journey through the real write
+and consumption path with a meaningful negative case, and validate any necessary
+fixture lifecycle. Grouped evidence must demonstrate every promised behavior it
+represents. A reproduction, coherent diff with a focused check, or resolved
+interface remains valid when it best tests the task's important assumption. These
+are lead-selected checkpoints, not provider-enforced timeouts.
 
 After acceptance, report cost/latency and remaining uncertainty, then expand only
 if concurrency reduces expected total completion cost or the user values its

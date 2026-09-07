@@ -2,12 +2,44 @@
 
 ## Make a decision, not a leaderboard
 
-Choose among available, authorized routes that meet the task's quality floor.
+Choose among available, authorized model-and-tool combinations that meet the
+task's capability, impact, context, and independence needs. Tool convenience
+affects feasibility and cost, but must not silently exclude a suitable model or
+provider family. Native Codex is a complete fallback, not the only normal candidate.
 Compare expected total completion cost and quota pressure, not model price alone.
 Include context setup, lead supervision, tools, expected repairs, and review.
 For a difficult coupled task, a short frontier execution may cost less than
 several cheaper attempts. When uncertainty is material, use the stronger plausible
-seat or a bounded reconnaissance task before implementing.
+seat or one bounded, reversible representative task before implementing. Comparable
+accepted work is useful qualification evidence. Where experience is absent, treat
+current model guidance as a tentative starting point; do not require a new
+calibration exercise in every campaign or make prior acceptance a permanent bar.
+
+## Cross-family review where it can change the decision
+
+For a substantial plan, strongly prefer one qualified reviewer from a different
+provider family before broad implementation when an authorized route is already
+usable. Ask it to challenge the user-goal interpretation, missing outcomes,
+architecture, high-impact assumptions, and proposed evidence of success. State
+the question and the decision it could change. This is the planned architecture
+review, not another gate or a review of every brainstorming exchange.
+
+Substantial means the plan contains interacting components or decisions with
+costly downstream consequences; file count does not decide it. For this routing
+choice, OpenAI, Anthropic/Claude, and xAI/Grok are separate families; Astra and
+Sol are both OpenAI. Use a qualified same-family reviewer when capability, access,
+user preference or restriction, or expected total cost makes it the better route,
+and briefly record why. Do not install a tool, buy access, create an account, or
+wait for quota merely to satisfy family diversity. Codex-only operation remains
+complete.
+
+Use a cross-family implementation review selectively for high-impact boundaries
+such as permissions, payments, data loss, installation or update behavior, and
+process ownership; repeated missed criteria; or unresolved material disagreement.
+Prefer substituting it for a planned review instead of adding a review. Try a
+direct test first when it can settle the question cheaply. A disagreement alone
+does not justify a third reviewer: the lead adjudicates the evidence and assigns
+only unresolved consequential questions.
 
 These are starting hypotheses for Astra or Sol leads, not measured rankings:
 
@@ -17,11 +49,11 @@ required accounts. Use the same capability hierarchy within Codex alone.
 | Work and residual judgment | Initial candidates | Effort starting point |
 |---|---|---|
 | Extract facts, enumerate callers, prescribed mechanical change | Luna; Haiku when its tools/pool fit better | Low on Luna; supported default on Haiku |
-| Bounded recon that must interpret behavior | Terra or Sonnet | Medium; high for interacting paths |
-| Known-interface implementation, meaningful tests, coherent refactor | Terra or Sonnet; Grok after a representative pilot | Medium for routine logic; high for multi-step coding |
+| Bounded recon that must interpret behavior | Terra, Sonnet, or Grok when its tools and context fit | Medium; high for interacting paths |
+| Known-interface implementation, meaningful tests, coherent refactor | Qualified Terra, Sonnet, or Grok | Medium for routine logic; high for multi-step coding |
 | Cheap additional hypotheses or competing design critique | Terra or Grok | Medium; substantiate claims before using them |
-| Ordinary bounded change review | Terra or Sonnet in a fresh context | Medium/high according to reasoning burden |
-| Consequential plan or code review, hard debugging | Sol or Opus in a fresh context | High; raise only for specific unresolved difficulty |
+| Ordinary bounded change review | Qualified Terra, Sonnet, or Grok in a fresh context | Medium/high according to reasoning burden |
+| Consequential plan or code review, hard debugging | Qualified frontier route such as Sol, Opus, or Grok in a fresh context | High; raise only for specific unresolved difficulty |
 | Architecture, difficult integration, ambiguity, final acceptance | Current Astra or Sol lead | Current effort; request a higher supported level only if needed |
 
 FAST is for low residual judgment, WORKHORSE for bounded decisions, FRONTIER for
@@ -29,12 +61,13 @@ unresolved design or difficult interaction. Apply impact separately: a prescribe
 security-sensitive edit can use a workhorse builder but need frontier review.
 No cheaper builder earns authority to certify its own work.
 
-Do not require a permanent provider caste. Grok may propose review findings;
-consequential independent review initially goes to Sol/Opus unless task-specific
-evidence establishes an alternative clears the same bar. Final acceptance always
-belongs to the lead. Benchmarks and vendor descriptions are priors, not proof of
-reliability in this repository. Higher effort does not automatically equal a
-more capable model and effort names do not transfer across providers.
+Do not require a permanent provider caste. Opus is a useful starting candidate
+for consequential cross-family review, and another qualified route can serve when
+its available model, tools, context, and independence clear the same task-specific
+bar. Final acceptance always belongs to the lead. Benchmarks and vendor descriptions
+are priors, not proof of reliability in this repository. Higher effort does not
+automatically equal a more capable model and effort names do not transfer across
+providers.
 
 ## Discover once; refresh on a reason
 

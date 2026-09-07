@@ -22,6 +22,10 @@ RETURN: result, changed paths, criterion evidence, exact checks and exits,
         remaining concerns, process/artifact identity, usage or unavailable
 ```
 
+Before freezing a review unit and dispatching review, establish that every writer
+to that unit is terminal. Further edits reopen the affected criteria; unrelated
+isolated work may continue.
+
 Use `REPORTED`, `NEEDS_CONTEXT`, or `BLOCKED` as useful report labels; exact prose
 format is not a product acceptance gate. Preserve original criterion IDs through
 repairs. A scout may report facts and hypotheses but does not approve architecture.
@@ -33,12 +37,16 @@ Record the dispatch and later its result in the written session crew record
 described in [crew-control.md](crew-control.md), including for a small delegated
 assignment. This can be one short section of an existing run document.
 
-## Native Codex first when the route fits
+## Select the model and execution route together
 
-Inspect the actual spawn schema. Request the chosen model and supported effort
-explicitly when available. For a self-contained worker or blind reviewer use
-`fork_turns: "none"` where supported. Full conversation inheritance increases
-context cost and contaminates independent review. Record the returned agent ID.
+Choose among qualified model-and-tool combinations using [routing.md](routing.md).
+Native Codex is a complete fallback and often the simplest transport, but transport
+convenience alone must not exclude a suitable authorized model or provider family.
+When using native agents, inspect the actual spawn schema. Request the chosen model
+and supported effort explicitly when available. For a self-contained worker or
+blind reviewer use `fork_turns: "none"` where supported. Full conversation
+inheritance increases context cost and contaminates independent review. Record the
+returned agent ID.
 
 Workers share files unless explicitly placed in an isolated checkout. A native
 agent is not a sandbox. Before dispatch, inspect status and compare ownership;
