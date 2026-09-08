@@ -13,7 +13,7 @@ All notable changes to Astra Foreman are documented here.
   after source changes.
 - Establishes one authoritative current checkpoint, links review-guard and raw
   evidence records, and adds elapsed time and precise usage distinctions at close.
-- Clarifies private-preview distribution while the public setup page is a waitlist.
+- Publishes v0.2.0 through the active public setup page and repository.
 
 ## 0.1.1 - 2026-09-05
 
