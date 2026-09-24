@@ -26,16 +26,19 @@ work; don't cancel productive active workers simply to rebalance providers.
   its model, tools, context, and independence fit the task. If material uncertainty
   affects eligibility, use one bounded, reversible representative task. The lead
   still adjudicates evidence and owns final acceptance.
-- "Use Claude allowance": favor Sonnet for suitable builds and Opus for consequential
-  review, while allowing another qualified Claude route when it clears the task's
+- "Use Claude allowance": favor Sonnet for suitable builds and
+  `claude-opus-5-5` for consequential review, while allowing another qualified Claude route when it clears the task's
   bar. Use distinct builder/reviewer contexts even within one family.
-- "Mainly Codex today": favor Luna for factual/mechanical tasks, Terra for bounded
-  builds, and fresh Sol for consequential review, keeping the Astra/Sol lead. Apply
+- "Mainly Codex today": favor Luna for factual/mechanical tasks and Sol for bounded
+  coding, with a fresh task-qualified reviewer, keeping the Astra/Sol lead. Apply
   the substantial-plan cross-family preference in [routing.md](routing.md) when
   another authorized qualified family is already usable.
 
-Apply model-specific preferences only to eligible roles. Do not spend a premium
-model on busywork merely to consume expiring allowance. If a hard restriction
+Apply model-specific preferences only to eligible roles. Preserve explicit
+session premium restrictions and any applicable user approval conditions; a
+generic provider preference does not authorize a separately restricted pool such
+as Fable. Do not
+spend a premium model on busywork merely to consume expiring allowance. If a hard restriction
 leaves no qualified reviewer, report the conflict and keep review pending; never
 relax the requirement silently. The lead's final acceptance is always separate.
 
@@ -46,9 +49,9 @@ CLI installation is required to use the skill with Codex alone.
 
 | Available and authorized crew | Suitable builders/recon | Consequential independent review |
 |---|---|---|
-| Codex only | Luna/Terra; stronger Codex when required | Fresh Sol, or fresh Astra if Sol unavailable and authorized |
+| Codex only | Luna for mechanical work; Sol for coding, stronger route when required | Fresh task-qualified Sol or Astra |
 | Codex + Grok | Qualified Codex or Grok; apply user preference | Qualified fresh Sol/Astra or Grok; apply independence and cross-family rules |
-| Codex + Claude | Qualified Codex or Claude; apply user preference | Qualified fresh Sol/Astra or Claude; Opus is a starting candidate for consequential review |
+| Codex + Claude | Qualified Codex or Claude; apply user preference | Qualified fresh Sol/Astra or Claude; Opus 5.5 is a starting candidate for consequential review |
 | All three | Qualified routes from all three | Any qualified independent route; strongly prefer another family for a substantial plan |
 
 These examples presume the particular models are available. Discover exact
@@ -63,9 +66,13 @@ already usable, apply the strong substantial-plan preference in routing.md.
 
 Maintain a small availability table with provider/account route, model/transport
 scope, state, evidence timestamp, reason, and next eligible retry/reset when known.
-Useful states: AVAILABLE, TEMPORARILY LIMITED, EXHAUSTED, NOT CONFIGURED,
-AUTH REQUIRED, and UNKNOWN. Keep account identifiers private. A model-specific
-failure does not establish that the entire provider is unavailable.
+Evidence states: LIVE, UNKNOWN, NOT_CONFIGURED, AUTH_REQUIRED, ENV_MISMATCH,
+MODEL_NOT_FOUND, BALANCE_EXHAUSTED, RATE_LIMITED, and TRANSPORT_FAILED. A catalog
+entry or sign-in alone is UNKNOWN for the exact model; an ordinary successful
+dispatch can establish LIVE. Do not make repeated paid probe calls. Keep account
+identifiers private. A model-specific failure does not establish that the entire
+provider is unavailable. If a sandbox and lead environment disagree, record both transports and test the intended
+writer environment before classifying provider capacity or model quality.
 
 When Claude or Grok reports a limit, tell the user the observed limit and new route
 without asking them to approve ordinary fallback. Preserve the original contract,
@@ -83,7 +90,7 @@ that is cheaper than migration. Known exhausted allowance goes directly to fallb
 An unknown error is not evidence of exhaustion; choose a known working route while
 retaining that uncertainty. Do not poll an exhausted provider on every ticket.
 Recheck at a known reset, a meaningful later checkpoint, or user report of restored
-capacity; require fresh evidence before returning it to AVAILABLE.
+capacity; require fresh evidence before returning it to LIVE.
 
 Limits are availability events, not coding-quality failures. Keep their costs and
 wall time in total run accounting. Missing permissions and policy refusals remain
@@ -144,14 +151,16 @@ separately from worker execution and external waits. Unobserved timing is unknow
 
 ## Adapt with evidence and restraint
 
-Before dispatch, write a short route hypothesis in the crew record: task type and
-risk; model/effort/tools; why it should fit; first expected artifact and checkpoint;
-signals for keeping or changing the route. For example: "Terra/high/native tools,
-bounded API contract; first request-path test at 15 minutes; inspect environment
-failure before changing model, change route after repeated attributable omissions."
-Consult this hypothesis and comparable evidence at checkpoints and before the next
-similar task. Record keep/change plus reason; do not recalculate a leaderboard on
-every tool call. Change one major factor where practical and preserve uncertainty.
+Before dispatch, record one small route card as the route hypothesis in the
+existing crew record: task/risk, eligible and authorized seats, exact selected
+model/effort/transport and access verdict with evidence time, needed tools/context,
+why it fits, alternatives, first artifact/checkpoint, and signals for changing
+route. Reuse this same entry until a reason changes; do not create a parallel
+form. For example: "Sol/high/native tools, bounded API contract; first request-path
+test at 15 minutes; inspect environment failure before changing model, change
+route after repeated attributable omissions." Consult it and comparable evidence
+at checkpoints and before the next similar task. Record keep/change plus reason;
+do not recalculate a leaderboard on every tool call. Change one major factor where practical and preserve uncertainty.
 
 An idle UI indicator or silence alone is not failure. At a missed agreed artifact
 checkpoint, inspect process state, tool wait, and latest artifact; send one focused

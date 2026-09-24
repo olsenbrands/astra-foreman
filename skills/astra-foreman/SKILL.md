@@ -142,3 +142,6 @@ authorized work until an actual external blocker or completion. Resources are
 conditional: routing and crew control for seats; execution for dispatch;
 verification for meaningful review; productivity for checkpoints; sprints for
 long work. Load only what the task needs.
+
+Optional Jev decision support is defined in [jev.md](references/jev.md).
+Use it only for a bounded eligible decision; ordinary routing and review remain complete without it.

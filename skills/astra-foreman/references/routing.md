@@ -41,33 +41,49 @@ direct test first when it can settle the question cheaply. A disagreement alone
 does not justify a third reviewer: the lead adjudicates the evidence and assigns
 only unresolved consequential questions.
 
-These are starting hypotheses for Astra or Sol leads, not measured rankings:
-
-First apply [crew-control.md](crew-control.md). These are role candidates, not
-required accounts. Use the same capability hierarchy within Codex alone.
+These are role hypotheses, not measured rankings. Apply
+[crew-control.md](crew-control.md) first. The exact model, effort, tools, context,
+transport and access must fit the task. [model-reference.md](model-reference.md)
+records dated IDs, API economics and limits; refresh it when a decision depends
+on current facts.
 
 | Work and residual judgment | Initial candidates | Effort starting point |
 |---|---|---|
-| Extract facts, enumerate callers, prescribed mechanical change | Luna; Haiku when its tools/pool fit better | Low on Luna; supported default on Haiku |
-| Bounded recon that must interpret behavior | Terra, Sonnet, or Grok when its tools and context fit | Medium; high for interacting paths |
-| Known-interface implementation, meaningful tests, coherent refactor | Qualified Terra, Sonnet, or Grok | Medium for routine logic; high for multi-step coding |
-| Cheap additional hypotheses or competing design critique | Terra or Grok | Medium; substantiate claims before using them |
-| Ordinary bounded change review | Qualified Terra, Sonnet, or Grok in a fresh context | Medium/high according to reasoning burden |
-| Consequential plan or code review, hard debugging | Qualified frontier route such as Sol, Opus, or Grok in a fresh context | High; raise only for specific unresolved difficulty |
-| Architecture, difficult integration, ambiguity, final acceptance | Current Astra or Sol lead | Current effort; request a higher supported level only if needed |
+| Fact extraction or prescribed mechanical change | `gpt-6-luna`; qualified Haiku | Low on Luna; supported default on Haiku |
+| Bounded recon or coding with meaningful tests | `gpt-6-sol`; qualified Sonnet or `grok-4.7` | Medium, high for interacting paths |
+| Coherent refactor, difficult implementation, hard debugging | `gpt-6-sol`; qualified `claude-opus-5-5`, `grok-4.7`, or Astra | High only for a specific reasoning need |
+| Ordinary independent change review | Fresh qualified Sol, Sonnet, Grok, or other capable route | Match effort to impact and residual judgment |
+| Consequential plan/code review | Fresh qualified `claude-opus-5-5`, Sol, Astra, or `grok-4.7` | High when warranted; separate reviewer context |
+| Architecture, integration, ambiguity, final acceptance | Current Astra or Sol lead | Current effort, raised for a concrete difficulty |
 
-FAST is for low residual judgment, WORKHORSE for bounded decisions, FRONTIER for
-unresolved design or difficult interaction. Apply impact separately: a prescribed
-security-sensitive edit can use a workhorse builder but need frontier review.
-No cheaper builder earns authority to certify its own work.
+FAST means the remaining work is extraction or a prescribed mechanical step
+with cheap, direct verification. WORKHORSE means bounded decisions or coherent
+coding with known interfaces and meaningful checks. FRONTIER means unresolved
+design, coupled behavior, or a high-impact failure mode whose absence is hard to
+prove. These are quality floors for the **task**, based on residual judgment and
+risk; no model name grants a tier. Qualify the specific model, effort, tools,
+context, access, and independent review route against that floor.
 
-Do not require a permanent provider caste. Opus is a useful starting candidate
-for consequential cross-family review, and another qualified route can serve when
-its available model, tools, context, and independence clear the same task-specific
-bar. Final acceptance always belongs to the lead. Benchmarks and vendor descriptions
-are priors, not proof of reliability in this repository. Higher effort does not
-automatically equal a more capable model and effort names do not transfer across
-providers.
+For consequential review, name the high-impact failure modes and the direct
+evidence needed to test or reason about them. The reviewer must be able to
+independently inspect that evidence and explain why each named risk is or is not
+addressed. A familiar provider label or generic PASS is insufficient. If no
+eligible authorized reviewer can do this, keep the outcome REVIEW PENDING;
+do not silently move to a restricted premium pool.
+
+Luna has an impact and judgment floor: do not give it an ambiguous implementation,
+security-sensitive decision, or consequential review solely for its price. Sol is
+a strong coding and agentic default and a valid lead, but its name does not
+promote every Sol review to frontier assurance. A qualified Grok route may build
+or review, including consequential work when its evidence, tools and independence
+clear the same bar. Grok 4.6 is an optional output-light candidate only when
+comparable local measurements favor its total token volume and accepted result.
+It is not a universally superior or required substitute for 4.7. Preserve
+qualified legacy routes such as `gpt-5.6-terra` when current models are
+unavailable; `gpt-6-terra` was not in the verified current catalog. Final
+acceptance belongs to the lead. A prescribed sensitive edit can have a workhorse
+builder and a stronger independent review. Compare
+accepted outcomes and whole-route cost, not model labels or vendor benchmarks.
 
 ## Discover once; refresh on a reason
 
@@ -107,8 +123,10 @@ that route and resolve it before making class-dependent decisions.
 Use only the intersection of model support and the actual execution surface.
 Do not translate a Codex `xhigh` setting into a Claude or Grok flag by analogy.
 Haiku 4.5 does not expose the same effort parameter as adaptive-thinking Claude
-models. Some Codex surfaces expose `ultra` while API guidance lists through `max`;
-do not assume `ultra` has a particular orchestration meaning or spend it by default.
+models. The local Codex catalog currently describes `ultra` as automatic task delegation.
+For a worker contract that forbids delegation, do not choose it unless the live
+surface demonstrates bounded authorized behavior. The API effort list and native
+runtime schema differ; use their actual intersection for this dispatch.
 
 Pass original intent and criteria inline, and bounded source paths for detail.
 Keep worker reports concise with links to raw proof. Reuse useful builder context
@@ -142,30 +160,12 @@ Keep the written session crew record specified in [crew-control.md](crew-control
 Change defaults on repeated comparable evidence, not a model's self-rating or one
 lucky pass. Do not update global memory or shared model policy without authority.
 
-## Dated reference, verified 2026-09-05
+## Dated model facts
 
-Standard short-context API USD per million input/output tokens. These numbers
-exclude cache handling, long-context premiums, tools, service tiers, and subscription
-accounting. Refresh when they materially affect a choice.
-
-| Model ID | Input / output | Source |
-|---|---|---|
-| `gpt-6-astra` | 10 / 50 | [OpenAI comparison](https://developers.openai.com/api/docs/models/compare) |
-| `gpt-5.6-sol` | 4 / 20 | Same comparison |
-| `gpt-5.6-terra` | 2 / 12 | Same comparison |
-| `gpt-5.6-luna` | 0.20 / 1.20 | [Luna](https://developers.openai.com/api/docs/models/gpt-5.6-luna) |
-| `claude-opus-5` | 5 / 25 | [Claude models](https://platform.claude.com/docs/en/models/overview) |
-| `claude-sonnet-5` | 2 / 10 | Same overview |
-| `claude-haiku-4-5-20251001` | 1 / 5 | Same overview |
-| `grok-4.6` | 2 / 6 | [xAI pricing](https://docs.x.ai/developers/pricing) |
-
-Grok's published long-context threshold is 200K with higher whole-request rates;
-do not infer an individual call stayed below it from average tokens per turn.
-Use per-call telemetry when available and include tool/context overhead. Smaller
-fresh task context is preferable to blindly sending a whole sprint history.
-
-Primary guidance: [OpenAI model guidance](https://developers.openai.com/api/docs/guides/latest-model),
-[Claude overview](https://platform.claude.com/docs/en/models/overview),
-[Grok 4.6](https://docs.x.ai/developers/grok-4-6).
-No public source here establishes which model is the best reviewer for this user's
-projects. Validate the routing hypotheses with accepted work.
+See [model-reference.md](model-reference.md), verified 2026-09-24, for exact IDs,
+API prices, cache and long-context treatment, effort ranges, and current caveats.
+API estimates do not measure subscription consumption. Use the live runtime
+catalog for dispatch limits. A successful exact-model request proves that route
+usable; only serving metadata establishes `SERVED`
+identity. The published API context ceiling does not override a smaller runtime
+window.

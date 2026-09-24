@@ -105,6 +105,21 @@ tool allowlist that includes shell, is not a security boundary. Review an isolat
 candidate and check its content before/after. Keep ambient foreman and archive
 instructions out of the candidate when they are not product inputs.
 
+## Bounded repairs and headless closeout
+
+A worker's write set remains binding. For a small documentation or test fix outside
+it, the lead must first authorize or reassign the exact bounded ownership after
+checking for overlapping writers. Disclosure by the worker alone is not permission.
+A cause-bounded lead takeover is possible under the same ownership check. Preserve
+the original outcome and attempt history, and independently verify affected
+meaningful behavior after the fix.
+
+Before a final headless response, wait for and collect every active worker and
+reviewer to a terminal state, or deliberately terminate each and reconcile its
+partial edits and evidence. An empty stream or completed checkpoint does not prove
+terminal state. A durable owned handoff is an exception only when the runtime
+explicitly supports it; ordinary headless exit is not a handoff.
+
 ## Failure and repair
 
 Environment failure: reproduce the failing capability outside the worker if safe.

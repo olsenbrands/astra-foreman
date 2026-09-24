@@ -2,7 +2,7 @@
 
 ![Astra Foreman](assets/astra-foreman-hero.png)
 
-**v0.2.0 · Codex skill · MIT licensed · public release**
+**Local candidate v0.3.0 · public release v0.2.0 · Codex skill · MIT licensed**
 
 Astra Foreman keeps Astra or Sol in charge of understanding the outcome,
 architecture, crew selection, supervision, independent review, and final

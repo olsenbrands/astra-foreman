@@ -2,6 +2,16 @@
 
 All notable changes to Astra Foreman are documented here.
 
+## 0.3.0 - 2026-09-24 (local candidate)
+
+- Refreshes task-fit model routing and dated API economics for GPT-6, Claude
+  Opus 5.5, and Grok 4.7 while keeping runtime provenance and provider
+  restrictions explicit.
+- Adds a compact route card, precise access states, bounded worker repair and
+  closeout guidance, and an optional privacy-gated Jev decision reference.
+- This is a local candidate; published release and download references remain
+  at v0.2.0.
+
 ## 0.2.0 - 2026-09-07
 
 - Strongly prefers an early qualified different-family challenge for substantial
