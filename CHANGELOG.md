@@ -2,6 +2,28 @@
 
 All notable changes to Astra Foreman are documented here.
 
+## 0.4.0 - 2026-10-22 (local candidate)
+
+- Fix round 1: sweep escalation wording, handle Jev HTTP 400 model-unavailable fallback, fix the Grok CLI path, and classify terra as a known line.
+- Fix round 2: require explicit nonpremium child pins under premium leads and normalize model case/provider prefixes while preserving catalog IDs and premium classification.
+- Fix round 3: require explicit CLI model flags, classify decorated premium IDs, normalize Grok IDs, and accept case-insensitive --line arguments.
+- Fix round 4: make opted-in reachable Jev the default for review merging, citation checks, and forwarded-text screening; require final disclosure of agent-directed instructions, clarify nonpremium Codex fallback and Astra Foreman naming, and strip --line whitespace with regression coverage.
+- Resolve newest visible model versions by line using a stdlib-only local catalog
+  CLI; compare numeric components, ignore hidden entries and Grok variants, and
+  flag unknown lines for recon. Confirm access before first real dispatch and
+  retain ordered same-line fallbacks after access refusal.
+- Remove automatic Astra/Fable routing at all versions. Premium dispatch requires
+  the user's request and separate confirmation naming model and cost in this
+  session; a premium lead remains permitted. Document the reservation helper's
+  enforcement limits.
+- Refresh dated evidence for GPT-6.1 Sol, cancelled GPT-6.1 Astra, Sonnet 5.5,
+  Haiku 5.5, and Jev 1.14. Ban Codex ultra automatic delegation.
+- Default optional Jev to the latest alias with bounded 1.14 then 1.13 pin
+  fallback; record served identity, preserve explicit overrides and require
+  session pin reuse. Clarify eligible advisory tasks and deterministic fallback.
+- Add offline resolver and mocked Jev regression coverage. This is a local
+  candidate; public release and download references remain at v0.2.0.
+
 ## 0.3.0 - 2026-09-24 (local candidate)
 
 - Refreshes task-fit model routing and dated API economics for GPT-6, Claude

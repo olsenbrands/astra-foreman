@@ -27,7 +27,7 @@ work; don't cancel productive active workers simply to rebalance providers.
   affects eligibility, use one bounded, reversible representative task. The lead
   still adjudicates evidence and owns final acceptance.
 - "Use Claude allowance": favor Sonnet for suitable builds and
-  `claude-opus-5-5` for consequential review, while allowing another qualified Claude route when it clears the task's
+  `opus` alias for consequential review, while allowing another qualified Claude route when it clears the task's
   bar. Use distinct builder/reviewer contexts even within one family.
 - "Mainly Codex today": favor Luna for factual/mechanical tasks and Sol for bounded
   coding, with a fresh task-qualified reviewer, keeping the Astra/Sol lead. Apply
@@ -36,8 +36,9 @@ work; don't cancel productive active workers simply to rebalance providers.
 
 Apply model-specific preferences only to eligible roles. Preserve explicit
 session premium restrictions and any applicable user approval conditions; a
-generic provider preference does not authorize a separately restricted pool such
-as Fable. Do not
+generic provider preference never authorizes astra or fable dispatch. Both require
+the current-session request and separate model-and-cost confirmation in the
+[core premium rule](../SKILL.md#premium-dispatch-requires-two-user-approvals). Do not
 spend a premium model on busywork merely to consume expiring allowance. If a hard restriction
 leaves no qualified reviewer, report the conflict and keep review pending; never
 relax the requirement silently. The lead's final acceptance is always separate.
@@ -49,14 +50,18 @@ CLI installation is required to use the skill with Codex alone.
 
 | Available and authorized crew | Suitable builders/recon | Consequential independent review |
 |---|---|---|
-| Codex only | Luna for mechanical work; Sol for coding, stronger route when required | Fresh task-qualified Sol or Astra |
-| Codex + Grok | Qualified Codex or Grok; apply user preference | Qualified fresh Sol/Astra or Grok; apply independence and cross-family rules |
-| Codex + Claude | Qualified Codex or Claude; apply user preference | Qualified fresh Sol/Astra or Claude; Opus 5.5 is a starting candidate for consequential review |
-| All three | Qualified routes from all three | Any qualified independent route; strongly prefer another family for a substantial plan |
+| Codex only | Luna for mechanical work; Sol for coding, higher effort on the sol line when required | Fresh task-qualified sol line |
+| Codex + Grok | Qualified nonpremium Codex or Grok; apply user preference | Qualified fresh sol line or Grok base line; apply independence and cross-family rules |
+| Codex + Claude | Qualified nonpremium Codex or Claude; apply user preference | Qualified fresh sol line or nonpremium Claude; opus alias is a starting candidate for consequential review |
+| All three | Qualified nonpremium routes from all three | Any qualified nonpremium independent route; strongly prefer another family for a substantial plan |
+
+If higher Sol effort cannot meet the bar, use a stronger qualified nonpremium
+route (e.g. the Claude `opus` alias) only if the crew scope permits it; otherwise
+report the capability gap. Codex-only scope never implies Astra dispatch.
 
 These examples presume the particular models are available. Discover exact
-models/efforts from the runtime; map the role to another qualified available
-Codex model if needed. A Codex account alone does not guarantee every model or
+models/efforts from the runtime; map the role to the next-newest visible version in the same
+Codex line after access refusal, or another qualified nonpremium line if needed. A Codex account alone does not guarantee every model or
 subagent tool. If no independent execution surface is available, disclose review
 pending/self-review under verification.md; do not claim an independent pass.
 Codex-only use remains complete. When another authorized qualified family is
@@ -68,8 +73,10 @@ Maintain a small availability table with provider/account route, model/transport
 scope, state, evidence timestamp, reason, and next eligible retry/reset when known.
 Evidence states: LIVE, UNKNOWN, NOT_CONFIGURED, AUTH_REQUIRED, ENV_MISMATCH,
 MODEL_NOT_FOUND, BALANCE_EXHAUSTED, RATE_LIMITED, and TRANSPORT_FAILED. A catalog
-entry or sign-in alone is UNKNOWN for the exact model; an ordinary successful
-dispatch can establish LIVE. Do not make repeated paid probe calls. Keep account
+entry or sign-in alone is UNKNOWN for the exact model; one cheap access ping
+before the first real dispatch establishes access. Resolve the newest visible
+version with the resolver in [routing.md](routing.md); reuse the ping within the
+session. Do not make repeated paid probe calls. Keep account
 identifiers private. A model-specific failure does not establish that the entire
 provider is unavailable. If a sandbox and lead environment disagree, record both transports and test the intended
 writer environment before classifying provider capacity or model quality.
@@ -78,7 +85,7 @@ When Claude or Grok reports a limit, tell the user the observed limit and new ro
 without asking them to approve ordinary fallback. Preserve the original contract,
 partial artifact, review requirements, and attempts. Verify the old writer is
 terminal and reconcile edits before replacement. Continue with already-authorized
-qualified Codex models, retaining another available preferred provider if useful.
+qualified nonpremium Codex models, retaining another available preferred provider if useful.
 Claude limited plus Grok available therefore leaves Codex + Grok; both optional
 providers limited leaves Codex-only. Do not wait for a reset while qualified
 available capacity can advance the task. Apply the same rule if a reviewer hits
@@ -152,7 +159,8 @@ separately from worker execution and external waits. Unobserved timing is unknow
 ## Adapt with evidence and restraint
 
 Before dispatch, record one small route card as the route hypothesis in the
-existing crew record: task/risk, eligible and authorized seats, exact selected
+existing crew record: task/risk, eligible nonpremium seats (or exact premium
+scope with both current-session approvals and disclosed cost), exact selected
 model/effort/transport and access verdict with evidence time, needed tools/context,
 why it fits, alternatives, first artifact/checkpoint, and signals for changing
 route. Reuse this same entry until a reason changes; do not create a parallel

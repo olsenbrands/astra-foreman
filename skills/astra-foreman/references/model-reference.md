@@ -1,59 +1,53 @@
-# Model reference — verified 2026-09-24
+# Model reference — dated evidence 2026-10-22
 
-These are published **standard API** prices in USD per million tokens, not Codex
-subscription charges, Claude allowance consumption, or a quality ranking. The
-columns are input / cache read / cache write (5-minute; 1-hour where offered) / output. Tool charges, service tiers,
-retries and context growth can change total cost. A fixed same-token estimate is
-only an API illustration, not measured usage or a recommendation.
+These facts are supplied by the shared model-refresh spec dated 2026-10-22;
+this offline update did not re-query providers. They are evidence examples,
+not pinned routing rules or proof of account access. Prices are standard API
+USD per million input/output tokens, not subscription charges or measured usage.
+Resolve each needed line to its newest visible version with
+`scripts/resolve_models.py`; confirm with one cheap ping before the first real
+dispatch. On an unknown/not-entitled refusal, record why and try the next-newest
+visible version in that same line. See [routing.md](routing.md).
 
-| Exact model ID | API $/M input / read / write / output | Published context | Role note |
-|---|---:|---:|---|
-| `gpt-6-astra` | 10 / 1 / 12.5 / 50 | 1,050,000 | Difficult judgment; qualified lead |
-| `gpt-6-sol` | 2 / .2 / 2.5 / 10 | 1,050,000 | Coding and agentic work; qualified lead |
-| `gpt-6-luna` | .1 / .01 / .125 / .5 | 1,050,000 | Mechanical/extraction with impact floor |
-| `claude-opus-5-5` | 4 / .20 / 5; 8 / 20 | 1,000,000; max output 128,000 | Difficult judgment and cross-family review candidate |
-| `claude-sonnet-5` | 2 / .2 / 2.5; 4 / 10 | 1,000,000 | Bounded work candidate |
-| `claude-haiku-4-5-20251001` | 1 / .1 / 1.25; 2 / 5 | 200,000 | Mechanical work candidate |
-| `claude-fable-5-1` | 10 / .25 / 12.5; 20 / 50 | 1,000,000 | Separately restricted premium pool |
-| `grok-4.7` | 2 / .5 / n/a / 6 | 500,000 | Qualified build/review candidate |
-| `grok-4.6` | 2 / .5 / n/a / 6 | 500,000 | Optional output-light measured candidate |
+## Dated evidence, not dispatch candidates
 
-OpenAI GPT-6 API output ceiling is 128K. Its >272K prompt tier reprices the
-**whole request**: input and cache at 2×, output at 1.5×. A local Codex catalog
-observed a 272,000 base window and 872,000 extended limit; the live dispatch
-surface governs, not the API maximum. OpenAI API reasoning effort is `none`,
-`low`, `medium`, `high`, `xhigh`, `max`; a native schema may differ and also expose
-`ultra` for Astra/Sol. The current local catalog describes `ultra` as automatic
-task delegation, so it does not fit a no-delegation worker without live evidence
-of bounded authorized behavior.
+| Line / dated model | API $/M input / output | Evidence on 2026-10-22 |
+|---|---:|---|
+| sol / `gpt-6.1-sol` | 2 / 10; cached input .10 | 1.05M context; AA Intelligence Index v4.3.2 52 at max, versus 48 for previous-generation `gpt-6-sol` |
+| astra / `gpt-6-astra` — PREMIUM | 10 / 50 | II 53; GPT-6.1 Astra was announced then cancelled for safety; no automatic dispatch |
+| luna / `gpt-6-luna` | .10 / .50 | No 6.1 luna in this dated catalog |
+| opus alias / Opus 5.5 | 4 / 20 | II 58 at max |
+| sonnet alias / Sonnet 5.5 | 2 / 10 | II 56 at max; released 2026-09-28 |
+| haiku alias / Haiku 5.5 | .10 / .50 up to 100K prompt tokens; .50 / 2.50 above | II 29–43 by effort; released 2026-10-07 |
+| fable alias / Fable 5.1 — PREMIUM | 10 / 50 | II 53; no automatic dispatch |
+| Grok base / `grok-4.7` | 2 / 6 | 500K context; whole request 2× at 200K prompt tokens; 4.7 Fast is a 2×-priced variant |
+| Jev latest alias / Jev 1.14 | .042 / 0 | Released 2026-10-14; served ID `typesafe/jev-1.14-20261014`; 32K/64K default limits, optional long-context header |
 
-Opus 5.5 defaults to medium adaptive thinking, always on. Higher effort may use
-more tokens than older Opus; there is no thinking-disabled/manual-budget shortcut,
-and the API rejects forced `tool_choice: any` or `tool` for this model.
-Verify CLI controls separately from API controls.
-Grok 4.7 supports `low`, `medium`, `high`, `xhigh`, default high. At >=200K prompt
-tokens, xAI doubles all token rates for the whole request. Check each call;
-average tokens per turn cannot establish whether a particular request crossed
-the threshold. `grok-build-0.1` is
-an early-access 256K candidate at 1 / .2 / 2 input/read/output; a catalog listing
-is not account access. Do not auto-select the harness-specific `grok-4.7-build-fast`.
-`typesafe/jev-1.13` is a separate decision classifier at $0.042/M input,
-$0 output and 32K context; see [Jev](https://openrouter.ai/typesafe/jev-1.13).
-Legacy `gpt-5.6-terra` remains a possible qualified fallback;
-`gpt-6-terra` was not in the verified current catalog.
+Do not choose `gpt-6-sol` while `gpt-6.1-sol` is available: the catalog labels
+it "Previous generation", and the sol line has a newer visible successor.
+Descriptions corroborate identity; numeric version comparison selects it.
+Similarly, a future visible luna successor is used automatically, even though
+this table predates it. Record "line <x> resolved to <id> (newer than evaluated
+<id>)" and check access. Missing/malformed catalog data is not permission to
+guess a default. A new line is "unknown line — recon first"; evaluate it in a
+bounded recon pass before use. Grok suffixed variants are never the base default.
 
-For a purely illustrative 100K uncached input and 20K output call below the long
-context tiers, standard API list prices are Astra $2.00, Sol $0.40, Luna $0.02,
-Opus 5.5 $0.80, Grok 4.7 $0.32. These exclude tools, cache behavior, retries,
-whole-route volume and service tier. Use the live runtime catalog and a successful exact-model request to establish
-usable access. Only serving metadata establishes `SERVED` identity; a sign-in,
-model list, or the model's self-report does not. Do not convert API dollars into subscription quota.
+Premium is by line for all versions of astra and fable. The table supplies cost
+evidence only; it grants no dispatch authority. The user must request the exact
+premium route and then separately confirm the model and its cost in this same
+session, as defined in [SKILL.md](../SKILL.md#premium-dispatch-requires-two-user-approvals).
+An existing premium lead is fine. Never use Codex `ultra`: it automatically
+delegates, including workers spawning workers.
 
-Primary sources: [OpenAI Astra](https://developers.openai.com/api/docs/models/gpt-6-astra),
-[Sol](https://developers.openai.com/api/docs/models/gpt-6-sol),
-[Luna](https://developers.openai.com/api/docs/models/gpt-6-luna),
-[Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing),
-[Opus 5.5 behavior](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5),
-[Opus 5.5 limits](https://platform.claude.com/docs/en/models/opus-5-5/overview),
-[xAI pricing](https://docs.x.ai/developers/pricing), and
-[Grok 4.7](https://docs.x.ai/developers/models/grok-4.7).
+Use the live runtime's supported effort and context limits. A published API
+context ceiling does not override a smaller harness window. Claude's `opus`,
+`sonnet`, and `haiku` aliases already track newest models. Jev's default is
+`~typesafe/jev-latest`, with explicit pin fallbacks `typesafe/jev-1.14` then
+`typesafe/jev-1.13`; read its response `model` and pin that served ID for the
+rest of this session. See [jev.md](jev.md) for advisory-only use and privacy.
+
+Tool charges, service tiers, cache behavior, context growth, retries and total
+volume affect cost. Benchmarks are dated context, not task qualification.
+A catalog listing or sign-in does not establish entitlement. An access ping
+establishes that request works; only serving metadata establishes `SERVED`
+identity. Do not convert API dollars into subscription quota.

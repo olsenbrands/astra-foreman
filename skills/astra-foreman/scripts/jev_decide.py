@@ -13,7 +13,9 @@ import urllib.error
 import urllib.request
 
 ENDPOINT = "https://openrouter.ai/api/alpha/decisions"
-MODEL = "typesafe/jev-1.13"
+MODEL = "~typesafe/jev-latest"
+PIN_FALLBACKS = ("typesafe/jev-1.14", "typesafe/jev-1.13")
+JEV_PIN = re.compile(r"typesafe/jev-[0-9]+(?:\.[0-9]+)+(?:-[0-9]{8})?\Z")
 MAX_REQUEST_BYTES = 16_384  # Deliberately a byte cap, not a token estimate.
 MAX_RESPONSE_BYTES = 131_072
 ID = re.compile(r"^[A-Za-z][A-Za-z0-9_-]{0,63}$")
@@ -43,7 +45,7 @@ def settings():
                 for line in stream:
                     if ":" in line and not line.lstrip().startswith("#"):
                         key, value = line.split(":", 1)
-                        if key.strip() in ("privacy", "keychain-service", "provider"):
+                        if key.strip() in ("privacy", "keychain-service", "provider", "model"):
                             config[key.strip()] = value.strip()
         except (OSError, UnicodeError):
             raise Invalid("opt-in configuration unreadable") from None
@@ -68,7 +70,17 @@ def credential(config):
     return ""
 
 
-def validate_request(request, config):
+def selected_models(config, override=None):
+    """Explicit pins override discovery and never silently fall back."""
+    selected = override or os.environ.get("FOREMAN_JEV_MODEL") or config.get("model")
+    if selected:
+        if not isinstance(selected, str) or not (selected == MODEL or JEV_PIN.fullmatch(selected)):
+            raise Invalid("model override must be the Jev alias or a Jev pin")
+        return (selected,)
+    return (MODEL, *PIN_FALLBACKS)
+
+
+def validate_request(request, config, model=MODEL):
     if not isinstance(request, dict) or set(request) - {"privacy", "state", "questions"}:
         raise Invalid("request must contain only privacy, state, questions")
     privacy = request.get("privacy", "metadata")
@@ -134,7 +146,7 @@ def validate_request(request, config):
             or any(not text(level, 160) for level in criteria)
         ):
             raise Invalid("score needs 2 to 10 ordered descriptions")
-    body = json.dumps({"model": MODEL, "state": state, "questions": questions},
+    body = json.dumps({"model": model, "state": state, "questions": questions},
                       ensure_ascii=False, allow_nan=False, separators=(",", ":")).encode("utf-8")
     if len(body) > MAX_REQUEST_BYTES:
         raise Invalid("request exceeds byte cap")
@@ -150,7 +162,7 @@ def probabilities(values, expected):
         raise Invalid("probabilities do not sum to one")
 
 
-def validate_response(response, questions):
+def validate_response(response, questions, model=MODEL):
     if not isinstance(response, dict) or not isinstance(response.get("answers"), dict):
         raise Invalid("missing answers")
     answers = response["answers"]
@@ -187,8 +199,9 @@ def validate_response(response, questions):
                                    "legend": legend, "probabilities": answer["probabilities"],
                                    "confidence": answer["confidence"]}
     reported = response.get("model")
-    if reported is not None and (not isinstance(reported, str) or
-                                 not (reported == MODEL or reported.startswith(MODEL + "-"))):
+    if not isinstance(reported, str) or not JEV_PIN.fullmatch(reported):
+        raise Invalid("missing or unexpected reported model")
+    if model != MODEL and not (reported == model or re.fullmatch(re.escape(model) + r"-[0-9]{8}", reported)):
         raise Invalid("unexpected reported model")
     usage = response.get("usage")
     safe_usage = {"input_tokens": None, "output_tokens": None, "cost": None}
@@ -197,7 +210,7 @@ def validate_response(response, questions):
             value = usage.get(field)
             if number(value, 0, 1_000_000_000):
                 safe_usage[field] = value
-    return {"status": "ok", "model_requested": MODEL, "model_reported": reported or "unavailable",
+    return {"status": "ok", "model_requested": model, "model_reported": reported,
             "usage": safe_usage, "answers": clean_answers}
 
 
@@ -206,7 +219,9 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
-def http_failure(code):
+def http_failure(code, body=b""):
+    if code == 400 and b"does not exist" in body.lower():
+        return "MODEL_NOT_FOUND"
     if code in (301, 302, 303, 307, 308):
         return "REDIRECT_BLOCKED"
     if code == 401:
@@ -230,15 +245,22 @@ def post(body, key):
     try:
         with opener.open(request, timeout=10) as response:
             if response.status != 200:
-                raise Invalid(http_failure(response.status))
+                raw_error = response.read(MAX_RESPONSE_BYTES) if response.status == 400 else b""
+                raise Invalid(http_failure(response.status, raw_error))
             raw = response.read(MAX_RESPONSE_BYTES + 1)
     except urllib.error.HTTPError as error:
         code = error.code
+        raw_error = b""
+        if code == 400:
+            try:
+                raw_error = error.read(MAX_RESPONSE_BYTES)
+            except Exception:
+                pass  # Unreadable bodies remain HTTP_400, never a fallback signal.
         try:
             error.close()
         except Exception:
             pass
-        raise Invalid(http_failure(code)) from None
+        raise Invalid(http_failure(code, raw_error)) from None
     except Invalid:
         raise
     except (urllib.error.URLError, TimeoutError, OSError):
@@ -253,7 +275,7 @@ def post(body, key):
         raise Invalid("provider returned malformed JSON") from None
 
 
-def run(request_path, artifact_path):
+def run(request_path, artifact_path, model=None):
     if not artifact_path.endswith(".json") or os.path.lexists(artifact_path):
         raise Invalid("artifact path must be a fresh .json file")
     enabled, config = settings()
@@ -271,13 +293,31 @@ def run(request_path, artifact_path):
         raise
     except (OSError, UnicodeError, ValueError):
         raise Invalid("request unreadable or malformed") from None
-    body = validate_request(payload, config)
+    models = selected_models(config, model)
+    body = validate_request(payload, config, models[0])
     key = credential(config)
     if not key:
         raise Invalid("OpenRouter key unavailable")
-    response, latency = post(body, key)
-    envelope = validate_response(response, payload["questions"])
-    envelope["latency_seconds"] = latency
+    attempts = []
+    total_latency = 0.0
+    for index, candidate in enumerate(models):
+        if index:
+            body = validate_request(payload, config, candidate)
+        start = time.monotonic()
+        try:
+            response, latency = post(body, key)
+        except Invalid as error:
+            # Do not retry auth, balance, rate limits, transport, or invalid output.
+            if str(error) not in ("HTTP_404", "MODEL_NOT_FOUND") or index == len(models) - 1:
+                raise
+            total_latency += time.monotonic() - start
+            attempts.append({"model": candidate, "reason": str(error)})
+            continue
+        total_latency += latency
+        envelope = validate_response(response, payload["questions"], candidate)
+        break
+    envelope["latency_seconds"] = round(total_latency, 3)
+    envelope["fallback_attempts"] = attempts
     encoded = json.dumps(envelope, ensure_ascii=False, allow_nan=False, indent=2).encode("utf-8") + b"\n"
     flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
     if hasattr(os, "O_NOFOLLOW"):
@@ -307,9 +347,10 @@ def main(argv=None):
     parser.add_argument("command", choices=["run"])
     parser.add_argument("request")
     parser.add_argument("artifact")
+    parser.add_argument("--model", help="session served pin or explicit Jev override; disables fallbacks")
     args = parser.parse_args(argv)
     try:
-        run(args.request, args.artifact)
+        run(args.request, args.artifact, args.model)
     except (Invalid, TypeError) as error:
         print("Jev unavailable: " + str(error), file=sys.stderr)
         return 1

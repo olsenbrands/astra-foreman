@@ -2,7 +2,7 @@
 
 ![Astra Foreman](assets/astra-foreman-hero.png)
 
-**Local candidate v0.3.0 · public release v0.2.0 · Codex skill · MIT licensed**
+**Local candidate v0.4.0 · public release v0.2.0 · Codex skill · MIT licensed**
 
 Astra Foreman keeps Astra or Sol in charge of understanding the outcome,
 architecture, crew selection, supervision, independent review, and final
@@ -52,7 +52,7 @@ requires a free signed-in DontSleepOnAI account and checkbox acknowledgment.
    replacement.
 4. Start a new Codex session and invoke `$astra-foreman` with the task.
 
-Python 3.9+ is required only for the dependency-free review-reservation helper.
+Python 3.9+ is required for the dependency-free helpers and offline tests.
 Available agents, model controls, and optional provider accounts depend on the
 runtime. The skill neither supplies subscriptions nor bypasses permissions.
 
@@ -63,9 +63,48 @@ $astra-foreman Plan this build, delegate the substantive delivery to qualified
 workers, retain independent review, and wait for my approval before deployment.
 ```
 
+## Model discovery and routing
+
+Route by line: Codex sol for workhorse tasks, luna for fast/mechanical tasks;
+Grok's base line; Claude `opus`, `sonnet`, and `haiku` aliases. From the repository
+root, resolve the newest visible Codex version without a network call:
+
+```sh
+python3 skills/astra-foreman/scripts/resolve_models.py --line sol --json
+```
+
+The resolver reads `${CODEX_HOME:-~/.codex}/models_cache.json`, compares versions
+numerically, ignores hidden entries, and returns ordered same-line fallbacks.
+Confirm with one cheap access ping before the first real dispatch. If refused
+as unknown/not entitled, record why and try next-newest in that line. A new line
+is "unknown line — recon first". As of 2026-10-22, sol resolves to `gpt-6.1-sol`;
+`gpt-6-sol` is previous generation and must not be selected by habit. The
+[dated evidence table](skills/astra-foreman/references/model-reference.md) records
+facts without pinning future routing. Never use Codex `ultra`; it auto-delegates.
+
+Astra and Fable are premium **at every version**. They are never automatically
+assigned workers, reviewers, verifiers, scouts, fallbacks, escalations, or second
+opinions, and never offered as defaults. Dispatch requires the user's request
+and a separate yes to confirmation naming the exact model and cost, both in the
+same session. Approvals expire with the session. An already selected premium
+lead is fine; see the [premium rule](skills/astra-foreman/SKILL.md#premium-dispatch-requires-two-user-approvals).
+The reservation counter cannot enforce dispatch approval; the lead checks it.
+
+Optional [Jev](skills/astra-foreman/references/jev.md) uses `~typesafe/jev-latest`,
+with unavailable-model pin fallbacks to 1.14 then 1.13. Record the served response
+`model` and reuse it as `--model` for the rest of the session. Jev remains opt-in
+and advisory: no dates/arithmetic, acceptance, or sole destructive/security gate;
+trivial work skips it. Routing and review work without Jev.
+
 ## Validation and limits
 
-The included helper has a dependency-free test suite. This release also receives
+The helpers have a dependency-free offline test suite:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+HTTP calls in the Jev tests are mocked. This release also receives
 focused package checks and a scenario review of its delivery, repair, review, and
 acceptance boundaries. Those checks support this package; they do not prove
 multi-hour reliability or guaranteed cost savings.

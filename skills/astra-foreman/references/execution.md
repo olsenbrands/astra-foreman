@@ -11,7 +11,9 @@ CRITERIA: observable behavior, negative constraints, and how each is checked
 DECISIONS: fixed architecture/interfaces; routine implementation decisions left to
            the worker; relevant uncertainty and escalation boundary
 OWNERSHIP: exact worktree and permitted write paths; shared resources and dependencies
-ROUTE: requested model/effort, reason, evidence status, budget/checkpoint
+ROUTE: line resolved to newest visible model/effort, access ping evidence,
+       reason, budget/checkpoint; premium requires both current-session user approvals
+       including separate confirmation of this exact model and disclosed cost
 BOUNDARIES: authorized effects through tests, ordinary repair, integration, and
             permitted release operations; no delegation, foreman skills, or unrelated changes
 STOP: criterion conflict, missing authority, material scope, architecture,
@@ -40,10 +42,22 @@ assignment. This can be one short section of an existing run document.
 ## Select the model and execution route together
 
 Choose among qualified model-and-tool combinations using [routing.md](routing.md).
+Resolve each line to its newest visible version and confirm access with one cheap
+ping before the first real dispatch; if refused, record why and try next-newest
+in the same line. Refuse premium dispatch unless both user approvals in the
+[core premium rule](../SKILL.md#premium-dispatch-requires-two-user-approvals) are
+recorded for this session, model, cost, and scope. Reservation success, a premium
+lead, or an inherited model does not grant premium-dispatch authority.
 Native Codex is a complete fallback and often the simplest transport, but transport
 convenience alone must not exclude a suitable authorized model or provider family.
-When using native agents, inspect the actual spawn schema. Request the chosen model
-and supported effort explicitly when available. For a self-contained worker or
+When using native agents, inspect the actual spawn schema. Under a premium lead,
+a child without an explicit nonpremium model pin IS a premium dispatch.
+Always pin an explicit nonpremium model (resolved newest `sol`/`luna`, or a
+nonpremium Claude/Grok route) on every spawn; if the spawn schema cannot pin a
+model, do not spawn — do the work inline or use a CLI route that pins it.
+`INHERITED_UNCONFIRMED` under a premium lead must be treated as a premium
+dispatch, never as an approval exception. Request supported effort explicitly
+when available. For a self-contained worker or
 blind reviewer use `fork_turns: "none"` where supported. Full conversation
 inheritance increases context cost and contaminates independent review. Record the
 returned agent ID.
@@ -64,7 +78,7 @@ Use an installed CLI when native controls cannot request the needed model or an
 authorized cross-provider route is useful. CLI dispatch is optional; absence of
 one provider does not block work another qualified authorized route can complete.
 Never silently substitute a new paid account/provider or an automatic model fallback.
-An announced fallback to already-authorized Codex capacity after a Claude/Grok
+An announced fallback to already-authorized nonpremium Codex capacity after a Claude/Grok
 usage limit is ordinary orchestration, not a new permission gate. Apply
 [crew-control.md](crew-control.md); close/reconcile the previous writer first.
 
@@ -73,6 +87,12 @@ Check supported noninteractive invocation, model/effort controls, output capture
 tool permissions, no-delegation controls, and how to terminate the owned process
 tree. Choose a scope-compatible permission mode; do not modify global configuration
 or bypass safeguards merely to make a worker run.
+
+Every CLI launch (`codex exec`, `claude -p` / `--print`, or `grok`), including
+an access ping, must pass an explicit nonpremium `--model` flag. Relying on the
+CLI's configured default is unconfirmed and possibly premium: the user's Codex
+or Claude default could be Astra or Fable. Do not launch without the flag;
+an explicitly pinned premium model still requires both current-session approvals.
 
 Observed invocation surfaces on 2026-09-05, to rediscover before use:
 
@@ -87,7 +107,7 @@ argument arrays with a process API when possible; prompt text belongs in stdin o
 a file, not interpolated shell code. Do not compose shell commands from worker
 output. Reuse an existing reviewed launcher if the project provides one; inspect
 its permissions, routing, dependencies, and lifetime handling before using it.
-The skill does not require Sol/Fable Foreman to be installed.
+These CLI routes do not require Astra Foreman to be installed in the worker environment.
 
 Create one run directory for prompt, stdout, stderr, receipt, and final report.
 Save raw events privately; summarize relevant excerpts without rewriting evidence.
@@ -129,5 +149,6 @@ Do not request broad new permissions if the existing environment already suffice
 
 On a lost worker, inspect its actual process/thread state, preserve partial edits,
 and close it before replacement. Never reset the user's tree or delete unknown
-artifacts as routine cleanup. Escalations carry the original contract and smallest
+artifacts as routine cleanup. Model escalations stay on qualified nonpremium routes
+unless both approvals in the core premium rule are satisfied. Escalations carry the original contract and smallest
 useful failure delta. Record unsuccessful attempts under the original outcome.

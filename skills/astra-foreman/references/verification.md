@@ -6,7 +6,7 @@
 |---|---|
 | Pure formatting, comment, or inert copy change | Lead diff inspection and relevant cheap checks; self-reviewed is adequate |
 | Meaningful logic, architecture, or agent workflow | Focused behavioral checks plus one fresh independent review at the coherent change boundary |
-| Security boundary, money, migration, destructive behavior, subtle concurrency | Frontier independent review as defined in [routing.md](routing.md), plus direct evidence of the relevant risk and recovery behavior |
+| Security boundary, money, migration, destructive behavior, subtle concurrency | Frontier independent review (nonpremium unless the premium rule is satisfied) as defined in [routing.md](routing.md), plus direct evidence of the relevant risk and recovery behavior |
 
 Do not classify executable configuration, a workflow skill, or authorization
 instructions as inert documentation just because the extension is Markdown/YAML.

@@ -79,7 +79,8 @@ existing work by presenting a split or renamed ticket as new scope. Do not reset
 a fresh database, splitting work, or labeling a review as recon. A review round is
 one reserved model review call/context, including a substantive reviewer follow-up.
 Record `--kind plan` for architectural plan challenge and `--kind product` for
-implementation review AND re-verification. Each kind has its own escalation ladder,
+implementation review AND re-verification. Each kind has its own escalation ladder
+(nonpremium unless both approvals in the core premium rule are satisfied),
 while the guard retains total reservations across both. A normal plan challenge
 followed by a product review and one repair check is plan round 1, product rounds
 1 and 2. Never reclassify a repair check as plan/recon to escape the ladder.
@@ -95,6 +96,16 @@ python3 /path/to/skill/scripts/review_guard.py finish /path/to/run/reviews.db --
 python3 /path/to/skill/scripts/review_guard.py status /path/to/run/reviews.db
 python3 /path/to/skill/scripts/review_guard.py add-outcomes /path/to/run/reviews.db --outcomes ITEM-3 --reason 'User authorized the additional export behavior'
 ```
+
+This helper is deliberately only a review-reservation counter: it accepts no
+model, session-approval, or launch controls, and cannot refuse a premium call at
+the transport. Adding an approval flag here would not protect workers, scouts,
+fallbacks, or direct calls. The lead must refuse every premium dispatch unless
+the private crew record contains the user's premium request and a separate yes
+to a confirmation naming that exact model and cost, both in this session. Apply
+[the core premium rule](../SKILL.md#premium-dispatch-requires-two-user-approvals)
+before reserving or launching. A reservation and its escalation/exception fields
+never constitute either approval; approvals expire at the session boundary.
 
 Dispatch only after a successful reservation. Copy its ID into the crew record
 and bind the returned worker identity there immediately after launch. A batched
