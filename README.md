@@ -2,7 +2,7 @@
 
 ![Astra Foreman](assets/astra-foreman-hero.png)
 
-**Local candidate v0.4.0 · public release v0.2.0 · Codex skill · MIT licensed**
+**v0.4.0 · Codex skill · MIT licensed**
 
 Astra Foreman keeps Astra or Sol in charge of understanding the outcome,
 architecture, crew selection, supervision, independent review, and final
@@ -36,7 +36,7 @@ becomes substantive.
 
 The source and Git history are publicly available in the
 [Astra Foreman repository](https://github.com/olsenbrands/astra-foreman).
-That repository tracks `dist/astra-foreman-v0.2.0.zip`, and its public release
+Its [v0.4.0 release](https://github.com/olsenbrands/astra-foreman/releases/tag/v0.4.0)
 ZIP is downloadable without a site sign-in or checkbox acknowledgment.
 The versioned ZIP is available from the public
 [setup page](https://www.dontsleeponai.com/astra-foreman); that site download
@@ -46,7 +46,7 @@ requires a free signed-in DontSleepOnAI account and checkbox acknowledgment.
    history or download its ungated public release ZIP.
 2. To obtain the packaged ZIP from the setup page, sign in to a free
    DontSleepOnAI account, acknowledge the checkbox, then download and unpack
-   `astra-foreman-codex-v0.2.0.zip`.
+   `astra-foreman-codex-v0.4.0.zip`.
 3. Ask Codex to inspect and install the included `astra-foreman` folder in its
    user-level skills directory, preserving an existing installation before
    replacement.

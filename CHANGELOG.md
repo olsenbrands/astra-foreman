@@ -2,7 +2,7 @@
 
 All notable changes to Astra Foreman are documented here.
 
-## 0.4.0 - 2026-10-22 (local candidate)
+## 0.4.0 - 2026-10-22
 
 - Fix round 1: sweep escalation wording, handle Jev HTTP 400 model-unavailable fallback, fix the Grok CLI path, and classify terra as a known line.
 - Fix round 2: require explicit nonpremium child pins under premium leads and normalize model case/provider prefixes while preserving catalog IDs and premium classification.
@@ -21,8 +21,7 @@ All notable changes to Astra Foreman are documented here.
 - Default optional Jev to the latest alias with bounded 1.14 then 1.13 pin
   fallback; record served identity, preserve explicit overrides and require
   session pin reuse. Clarify eligible advisory tasks and deterministic fallback.
-- Add offline resolver and mocked Jev regression coverage. This is a local
-  candidate; public release and download references remain at v0.2.0.
+- Add offline resolver and mocked Jev regression coverage.
 
 ## 0.3.0 - 2026-09-24 (local candidate)
 
